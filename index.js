@@ -1,7 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
-const port = 3017;
+const port = process.env.PORT || 3017;
+
 
 mongoose.connect("mongodb+srv://oswaldojtipan:trabatrix2@cluster0.djnk15e.mongodb.net/Barroco?retryWrites=true&w=majority&appName=Cluster0");
 
