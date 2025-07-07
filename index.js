@@ -1,21 +1,19 @@
+require("dotenv").config();
 const express = require("express");
-const mongoose = require("mongoose");
+const connectDB = require("./config/db");
+
 const app = express();
-const port = process.env.PORT || 3017;
+const port = process.env.PORT || 3000;
 
-
-mongoose.connect(process.env.MONGODB_URI);
-
-
-const db = mongoose.connection;
-db.on("error", (error) => console.error(error));
-db.once("open", () => console.log("Connected to MongoDB Database"));
-
+connectDB();
 app.use(express.json());
 
-const productRouter = require("./routes/productRoutes");
-app.use("/barroco", productRouter);
+const maskRoutes = require("./routes/maskRoutes");
+app.use("/exam2p/masks", maskRoutes);
 
-app.listen(port, () =>
-  console.log("MY Computer Store Server is running on port --> " + port)
-);
+const errorHandler = require("./middlewares/errorHandler");
+app.use(errorHandler);
+
+app.listen(port, () => {
+  console.log(`Server Running at http://localhost:${port}`);
+});
