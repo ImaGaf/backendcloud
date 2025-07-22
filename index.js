@@ -5,6 +5,10 @@ const connectDB = require("./config/db");
 const app = express();
 const port = process.env.PORT || 3000;
 
+const cors = require('cors');  
+app.use(cors());               
+
+
 connectDB();
 app.use(express.json());
 
